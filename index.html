@@ -1,1 +1,41 @@
-HI world
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Blog</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+
+      .blog-post {
+          margin: 20px;
+      }
+
+      .title {
+          font-size: 2em;
+          color: #333;
+      }
+
+      .date, .author {
+          font-size: 1.2em;
+          color: #666;
+      }
+
+      .content {
+          font-size: 1em;
+          color: #333;
+      }
+  </style>
+</head>
+<body>
+  <div class="blog-post">
+      <h1 class="title">Blog Post Title</h1>
+      <p class="date">Posted on: 12/01/2023</p>
+      <p class="author">By: Author Name</p>
+      <p class="content">This is the blog post content.</p>
+  </div>
+  <script>
+      document.querySelector('.date').textContent = 'Posted on: ' + new Date().toLocaleDateString();
+  </script>
+</body>
+</html>
