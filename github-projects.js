@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 // GitHub API script
 const apiUrl = 'https://api.github.com/users/BDhaCkers009/repos';
 const token = process.env.PROJECTS_TOKEN;
