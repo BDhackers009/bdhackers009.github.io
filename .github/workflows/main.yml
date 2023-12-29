@@ -23,5 +23,5 @@ jobs:
 
     - name: Fetch GitHub Projects
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
       run: node github-projects.js
