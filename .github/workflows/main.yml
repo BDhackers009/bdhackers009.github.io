@@ -1,29 +1,29 @@
 name: Fetch GitHub Projects
 
 on:
-  push:
-    branches:
-      - main
+ push:
+   branches:
+     - main
 
 jobs:
-  fetch-projects:
-    runs-on: ubuntu-latest
+ fetch-projects:
+   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+   steps:
+   - name: Checkout repository
+     uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
+   - name: Set up Node.js
+     uses: actions/setup-node@v3
+     with:
+       node-version: '16'
 
-    - name: Install dependencies
-      run: |
-        npm install
-        npm install node-fetch ts-node
+   - name: Install dependencies
+     run: |
+       npm install
+       npm install node-fetch ts-node typescript
 
-    - name: Fetch GitHub Projects
-      env:
-        PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
-      run: npx ts-node github-projects.js
+   - name: Fetch GitHub Projects
+     env:
+       PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+     run: npx ts-node github-projects.js
