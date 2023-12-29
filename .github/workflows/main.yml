@@ -26,4 +26,4 @@ jobs:
     - name: Fetch GitHub Projects
       env:
         PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
-      run: npx ts-node --loader ts-node/esm github-projects.js
+      run: npx ts-node github-projects.js
