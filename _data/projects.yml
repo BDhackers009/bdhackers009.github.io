@@ -1,6 +1,11 @@
 # Selected work shown on the home page. Order here is the order on the page.
 # meta is the small mono text on the right; description is the grey line below.
 
+- name: modded-ubuntu
+  url: https://github.com/modded-ubuntu/modded-ubuntu
+  description: An Ubuntu XFCE desktop on Android through Termux, with no root required.
+  meta: Lead developer · 1,243 stars
+
 - name: nethunter-termux
   url: https://github.com/BDhackers009/nethunter-termux
   description: A minimal Kali NetHunter build for non-rooted Android phones, installed through Termux.
