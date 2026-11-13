@@ -1,0 +1,32 @@
+# Selected work shown on the home page. Order here is the order on the page.
+# meta is the small mono text on the right; description is the grey line below.
+
+- name: nethunter-termux
+  url: https://github.com/BDhackers009/nethunter-termux
+  description: A minimal Kali NetHunter build for non-rooted Android phones, installed through Termux.
+  meta: Shell · 77 stars
+
+- name: SocialPhish-2.0
+  url: https://github.com/BDhackers009/SocialPhish-2.0
+  description: Reworked SocialPhish phishing toolkit that works over Wi-Fi instead of a hotspot.
+  meta: HTML · 18 stars
+
+- name: fixpip3
+  url: https://github.com/BDhackers009/fixpip3
+  description: Fixes the platformdirs error that breaks pip3 inside proot-distro.
+  meta: Python · 12 stars
+
+- name: ytpro
+  url: https://github.com/BDhackers009/ytpro
+  description: YouTube audio and video player for Termux, with background playback and downloads.
+  meta: Shell · 10 stars
+
+- name: wpscan-termux
+  url: https://github.com/BDhackers009/wpscan-termux
+  description: Installs WPScan in Termux without the usual dependency failures.
+  meta: Shell · 6 stars
+
+- name: wordlists
+  url: https://github.com/BDhackers009/wordlists
+  description: Fuzzing wordlists collected from SecLists, OneListForAll and sqlmap.
+  meta: Wordlists · 7 stars

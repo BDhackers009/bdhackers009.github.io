@@ -1,0 +1,23 @@
+---
+layout: default
+title: Writing
+description: CTF writeups and notes on Android, Linux and Termux.
+---
+<header class="post-header">
+  <h1>Writing</h1>
+  <p class="post-meta"><span>{{ site.posts.size }} {% if site.posts.size == 1 %}post{% else %}posts{% endif %}</span></p>
+</header>
+
+<ul class="entries">
+  {% for post in site.posts %}
+  <li>
+    <a class="entry" href="{{ post.url | relative_url }}">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      <span class="entry-title">{{ post.title }}</span>
+      {% if post.summary %}<span class="entry-summary">{{ post.summary }}</span>{% endif %}
+    </a>
+  </li>
+  {% else %}
+  <li class="empty">Nothing published yet.</li>
+  {% endfor %}
+</ul>

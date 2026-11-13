@@ -1,0 +1,13 @@
+# Optional résumé sections. They are hidden while the lists are empty.
+#
+# Each entry takes four fields:
+#   title     what you did or studied
+#   subtitle  the organisation (optional)
+#   period    free text, e.g. "2024 — present"
+#   note      one line of detail (optional)
+
+experience: []
+
+education: []
+
+certifications: []

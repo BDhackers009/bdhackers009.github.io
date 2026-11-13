@@ -1,327 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+---
+<section class="intro">
+  <h1>{{ site.author.name }}</h1>
+  <p class="lede">I build security tools for Android and Linux, mostly from a phone running Termux. Most of what is on this page started as a fix for something that got in my way.</p>
+  <p class="lede">I write up CTFs when I finish them, and make Termux and Linux videos at <a href="https://www.youtube.com/@LearnTermux">@LearnTermux</a>.</p>
+  <p class="byline">Termux · Android security · CTF writeups</p>
+</section>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BDhaCkers009 - Cybersecurity Portfolio</title>
-    <!-- Fonts and Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Keep your existing CSS unchanged */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<section class="section" id="work">
+  <div class="section-head">
+    <h2>Selected work</h2>
+    <a href="https://github.com/{{ site.author.handle }}?tab=repositories">All repositories</a>
+  </div>
+  <ul class="work">
+    {% for project in site.data.projects %}
+    <li class="work-item">
+      <div class="work-row">
+        <a class="work-title" href="{{ project.url }}">{{ project.name }}</a>
+        <span class="work-meta">{{ project.meta }}</span>
+      </div>
+      <p class="work-desc">{{ project.description }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
 
-        body {
-            background: radial-gradient(circle at center, #0d1b2a, #000);
-            color: #00ffcc;
-            font-family: 'Orbitron', sans-serif;
-            overflow-x: hidden;
-            position: relative;
-        }
+{% include cv.html %}
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/circuit-pattern.png');
-            opacity: 0.05;
-            z-index: -1;
-            animation: circuitFlow 20s infinite linear;
-        }
+<section class="section" id="writing">
+  <div class="section-head">
+    <h2>Writing</h2>
+    <a href="{{ '/writing/' | relative_url }}">All posts</a>
+  </div>
+  <ul class="entries">
+    {% for post in site.posts limit: 5 %}
+    <li>
+      <a class="entry" href="{{ post.url | relative_url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <span class="entry-title">{{ post.title }}</span>
+        {% if post.summary %}<span class="entry-summary">{{ post.summary }}</span>{% endif %}
+      </a>
+    </li>
+    {% else %}
+    <li class="empty">Nothing published yet.</li>
+    {% endfor %}
+  </ul>
+</section>
 
-        @keyframes circuitFlow {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100px, -100px); }
-        }
-
-        .navbar {
-            background: rgba(10, 10, 10, 0.9);
-            padding: 1.5rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-        }
-
-        .navbar a {
-            color: #00ffcc;
-            font-size: 2rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-
-        .navbar a:hover {
-            color: #ff007a;
-            text-shadow: 0 0 10px #ff007a;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 12rem 2rem;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(26, 26, 26, 0.5));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section h1 {
-            font-size: 5rem;
-            color: #00ffcc;
-            text-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
-            animation: glitch 2s infinite;
-        }
-
-        .hero-section p {
-            font-size: 1.8rem;
-            font-family: 'Roboto Mono', monospace;
-            margin-top: 1rem;
-            color: #66ffcc;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-5px, 5px); }
-            40% { transform: translate(5px, -5px); }
-            60% { transform: translate(-5px, 0); }
-            80% { transform: translate(5px, 0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section {
-            padding: 5rem 2rem;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: #00ffcc;
-            text-align: center;
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .skills, .projects, .contact {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem;
-        }
-
-        .card {
-            background: rgba(26, 26, 26, 0.8);
-            border: 2px solid #00ffcc;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 204, 0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
-        }
-
-        .card h3 {
-            font-size: 1.8rem;
-            color: #00ffcc;
-            margin-bottom: 1rem;
-        }
-
-        .card p, .card a {
-            font-family: 'Roboto Mono', monospace;
-            color: #66ffcc;
-        }
-
-        .card a {
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .card a:hover {
-            color: #ff007a;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(10, 10, 10, 0.9);
-            box-shadow: 0 -5px 20px rgba(0, 255, 204, 0.3);
-        }
-
-        .footer p {
-            font-family: 'Roboto Mono', monospace;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="#">BDhaCkers009</a>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h3>Mustakim Ahmed Sifat</h3>
-        <p>Ethical Hacker | Cybersecurity Enthusiast</p>
-    </section>
-
-    <!-- About Section -->
-    <section class="section">
-        <h2 class="section-title">About Me</h2>
-        <p style="text-align: center; font-family: 'Roboto Mono', monospace; max-width: 800px; margin: 0 auto;">
-            Passionate about ethical hacking and cybersecurity. I believe in securing the digital world and constantly learning new techniques to stay ahead in the ever-evolving landscape.
-        </p>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section skills">
-        <h2 class="section-title">Skills</h2>
-        <div class="card">
-            <h3><i class="fas fa-code"></i> Programming</h3>
-            <p>Python, JavaScript, Bash</p>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-shield-alt"></i> Security</h3>
-            <p>Penetration Testing, Network Security</p>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-tools"></i> Tools</h3>
-            <p>Kali Linux, Metasploit, Wireshark</p>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section projects">
-        <h2 class="section-title">Projects</h2>
-        <div id="projects-container"></div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section contact">
-        <h2 class="section-title">Contact</h2>
-        <div class="card">
-            <h3><i class="fas fa-envelope"></i> Email</h3>
-            <p><a href="mailto:bdhackers009@example.com">bdhackers009@example.com</a></p>
-        </div>
-        <div class="card">
-            <h3><i class="fab fa-github"></i> GitHub</h3>
-            <p><a href="https://github.com/BDhackers009" target="_blank">BDhackers009</a></p>
-        </div>
-        <div class="card">
-            <h3><i class="fab fa-twitter"></i> Twitter</h3>
-            <p><a href="https://twitter.com/BDhackers009" target="_blank">@BDhackers009</a></p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2025 BDhaCkers009 | Designed with <i class="fas fa-heart" style="color: #ff007a;"></i> by BDhaCkers009</p>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // Fetch and display the most starred GitHub repository
-        async function fetchMostStarredRepo() {
-            const username = 'BDhackers009';
-            const projectsContainer = document.getElementById('projects-container');
-            
-            try {
-                // Fetch all repositories for the user
-                const response = await fetch(`https://api.github.com/users/${username}/repos`);
-                const repos = await response.json();
-
-                if (!Array.isArray(repos) || repos.length === 0) {
-                    projectsContainer.innerHTML = '<p>No repositories found.</p>';
-                    return;
-                }
-
-                // Sort repositories by star count in descending order
-                repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
-
-                // Display the most starred repository
-                const topRepo = repos[0]; // Get the top one
-                const projectCard = document.createElement('div');
-                projectCard.classList.add('card');
-                projectCard.style.opacity = '0';
-                projectCard.innerHTML = `
-                    <h3>${topRepo.name}</h3>
-                    <p>${topRepo.description || 'No description available'}</p>
-                    <p>⭐ Stars: ${topRepo.stargazers_count}</p>
-                    <a href="${topRepo.html_url}" target="_blank">View Repository</a>
-                `;
-
-                projectsContainer.appendChild(projectCard);
-
-                // Animate card on load
-                setTimeout(() => {
-                    projectCard.style.transition = 'opacity 0.5s, transform 0.5s';
-                    projectCard.style.opacity = '1';
-                    projectCard.style.transform = 'translateY(0)';
-                }, 100);
-
-            } catch (error) {
-                console.error('Error fetching repos:', error);
-                projectsContainer.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
-            }
-        }
-
-        fetchMostStarredRepo();
-
-        // Scroll Animation for Sections
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 1s ease-out forwards';
-                }
-            });
-        }, { threshold: 0.2 });
-
-        sections.forEach(section => observer.observe(section));
-    </script>
-</body>
-
-</html>
+<section class="section" id="contact">
+  <div class="section-head">
+    <h2>Contact</h2>
+  </div>
+  <p class="contact-lede">The quickest way to reach me is X or GitHub{% if site.email and site.email != "" %}. Email works for anything longer{% endif %}.</p>
+  <ul class="links">
+    {% if site.email and site.email != "" %}
+    <li>
+      <a href="mailto:{{ site.email }}">
+        <span class="link-name">Email</span>
+        <span class="link-handle">{{ site.email }}</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for account in site.data.socials %}
+    <li>
+      <a href="{{ account.url }}" rel="me">
+        <span class="link-name">{{ account.name }}</span>
+        <span class="link-handle">{{ account.handle }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
